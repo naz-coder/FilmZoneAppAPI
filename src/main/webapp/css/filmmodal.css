@@ -1,0 +1,238 @@
+@charset "UTF-8";
+
+/* CREATE FILM MODAL */
+.modal_overlay {
+  position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #888888;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./assets/images/cardmapr-nl-s8F8yglbpjo-unsplash.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    background-position: right bottom;
+    transition: all 0.5s ease;
+
+}
+
+.modal_interior {
+  background-color: #ffffff;
+    background-position: right bottom;
+    transition: all 0.5s ease;
+    padding: 20px;
+    margin: 10% auto auto auto;
+    border-radius: 1rem; 
+    border: 1px solid #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   width: 600px;
+    height: 580px; 
+    
+    /* height:100vh;
+  width:50vw; */
+}
+
+.modal {
+  background: white;
+  height:100%;
+  width:100%;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-position: right bottom;
+    transition: all 0.5s ease;
+    padding: 20px;
+    margin: auto;
+    border: 1px solid #ffffff;
+}
+
+.modal-body {
+  padding-top: 10px;
+}
+
+
+.modal_header{
+	display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 25px;
+ color: #232B09; 
+ padding: 5% 0 3% 0;
+}
+
+.fa-xmark{
+	color: #FF0000;
+}
+
+.fa-xmark:hover{
+	color: #8b0000;
+	background-position: left bottom;
+    transition: all 0.5s ease-in;
+    cursor: pointer;
+}
+
+.cancel_icon{
+    background-color: #e5bcb0;
+    border: 1px solid #e5bcb0;
+    border-radius: 0.25rem;
+    background-position: right bottom;
+    transition: all 0.5s ease-in;
+    padding: 0rem 1rem;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    text-align: center;
+    color: #333333;
+  }
+
+  .cancel_icon:hover{
+  background: #b3735f;
+    cursor: pointer; 
+  }
+  
+.film_form input{
+	display: block;  
+	width: 97%;
+    padding: 0.7rem 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    border: 1px solid #333333;
+    border-radius: 0.25rem;
+    text-align: left;
+}
+
+.film_form input:focus{
+    outline: none;
+    color: #333333;
+}
+
+.film_form input::placeholder{
+    color: #333333;
+}
+
+.film_submit_btn{
+	width: 100%;
+    background-color: #232B09;
+    border: 1px solid #232B09;
+    border-radius: 0.25rem;
+    background-position: right bottom;
+    transition: all 0.5s ease-in;
+    padding: 0rem 1rem;
+    height: 3rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.1rem;
+
+}
+
+.film_submit_btn:hover{
+    background-color: #5a6035;
+    border: 1px solid #5a6035;
+    background-position: left bottom;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.edit_film_modal_interior {
+  background-color: #ffffff;
+    background-position: right bottom;
+    transition: all 0.5s ease;
+    padding: 20px;
+    margin: 12vh auto auto auto;
+    border-radius: 1rem; 
+    border: 1px solid #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   width: 600px;
+    height: 670px; 
+}
+
+.edit_film_form input{
+	display: block;  
+	width: 97%;
+    padding: 0.4rem 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    border: 1px solid #333333;
+    border-radius: 0.25rem;
+    text-align: left;
+}
+
+/* FILM ALERT MODAL */
+.alert_modal_overlay {
+  position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #888888;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./assets/images/cardmapr-nl-s8F8yglbpjo-unsplash.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    background-position: right bottom;
+    transition: all 0.5s ease;
+
+}
+
+.alert_modal_interior {
+  background-color: #ffffff;
+    background-position: right bottom;
+    transition: all 0.5s ease;
+    padding: 20px;
+    margin: 35vh auto auto auto;
+    border-radius: 1rem; 
+    border: 1px solid #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   width: 500px;
+    height: 250px; 
+    display: flex;
+  align-items: center;
+  justify-content: center;
+    
+    
+    /* height:100vh;
+  width:50vw; */
+}
+
+.alert_modal_content{
+	  font-size: 25px;
+ color: #232B09; 
+ padding: 5% 0 3% 0;
+}
+  
+.alert_route_btn{
+	width: 100%;
+    background-color: #232B09;
+    border: 1px solid #232B09;
+    border-radius: 0.25rem;
+    background-position: right bottom;
+    transition: all 0.5s ease-in;
+    padding: 0rem 1rem;
+    height: 3rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.1rem;
+	margin-top: 1rem;
+}
+
+.alert_route_btn:hover{
+    background-color: #5a6035;
+    border: 1px solid #5a6035;
+    background-position: left bottom;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+
+
+/* MEDIA QUERY */
+
+@media screen and (max-width: 1024px){
+}

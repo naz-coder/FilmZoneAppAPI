@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>FilmZone App | RESTful APIs</title>
+    <link href="css/homestyles.css" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link  href="css/homestyles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body> 
+
+    <section>
+    	<div class="header_container">	
+    		<header>
+    		<a href="./"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXLMyznwq9CdxHMgZkVLaqd5pTV-itaZcQ9qpjmIbFcw&s" alt="App Logo"></a>
+    		 <div class="search_form_container">
+    		 	<form action="SearchFilm" method="get" id="searchForm">
+            	<input type="search" id="searchQuery" name="query" placeholder="Enter a word to search for a film"  class="search_form"/>
+            	<button type="submit" class="search_submit_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        	</form>
+    		 </div>
+            <div class="cta_container">
+            	<div class="create_film_btn_container"><a href="CreateFilm"><button class="create_film_btn">Create new film</button></a></div>
+            	<div class="create_film_btn_container"><select class="create_film_btn format_select">
+            		<option value="application/json">JSON</option>
+            		<option value="application/xml">XML</option>
+            		<option value="text/html" >TEXT</option>
+            		</select>
+           		</div>
+            </div>
+    	</header>
+    	</div>    
+    	
+    	<!-- <div><h3>FILM LIST HERO SECTION HERE</h3></div>-->
+    	
+    	<!-- View film -->
+        <div class="film_view_container">
+        <div>
+            <h3>Film List</h3>
+            <table id="filmsTable">
+            <thead>
+            <tr>
+            	<th>ID</th>
+            	<th>Title</th>
+            	<th>Year</th>
+            	<th>Director</th>
+            	<th>Stars</th>
+            	<th>Review</th>
+            	<th>Actions</th>
+            </tr>
+            </thead>
+                <tbody>
+
+                </tbody>
+       
+            </table>
+        </div>  
+        </div>
+        
+         <div class="footer_container">	
+    		<footer>
+    			<h5>&copy;Favour Chinaza Anajemba</h5>
+    			<a href="https://www.nazanajemba.com/" target="blank"><p>Visit Portfolio</p></a>
+    		</footer>
+    	</div>  
+    	 
+    </section>
+    
+    <!-- <script type="text/javascript" src="script/main.js"></script> -->
+    <script>
+    function jsonFetch(){
+    	const url = 'api';
+    	fetch(url,{
+    		headers: {
+    			"Accept": document.querySelector(".format_select").value
+    		}
+    	})
+    	.then(response => response.json())
+    	.then(films => {
+    		const tableBody = document.querySelector('#filmsTable tbody');
+    		// Clear existing entries if any
+    		tableBody.innerHTML = '';
+    		let row = "";
+    		films.forEach(film => {
+    			row += `<tr>
+    				<td>${film.id}</td>
+                    <td>${film.title}</td>
+                    <td>${film.year}</td>
+                    <td>${film.director}</td>
+                    <td>${film.stars}</td>
+                    <td>${film.review}</td>
+                    <td>
+                    	<div  class="film_actions">
+                    		<a href="UpdateFilm?id=${film.id}"><i class="fa-regular fa-pen-to-square"></i></a>
+                    		<a href="DeleteFilm?filmIdToDelete=${film.id}"><i class="fa-solid fa-trash-can"></i></a>
+                    	</div> 
+                    </td>
+    			</tr>`
+    		})
+    		tableBody.innerHTML = row;
+    	})
+    }
+    
+    function xmlFetch(){
+    	const url = 'api';
+    	fetch(url, {
+    		headers: {
+    			"Accept": document.querySelector(".format_select").value
+    		}
+    	})
+    	.then(response => response.text())
+    	.then(films => {
+    		let xml = new DOMParser().parseFromString(films,"application/xml");
+    		
+    		const tableBody = document.querySelector('#filmsTable tbody');
+    		tableBody.innerHTML = '';  // Clear existing entries
+    		let row = "";
+    		let sel = xml.querySelectorAll("film")
+    		for(let i = 0; i < sel.length; i++){
+    			let film = sel[i];
+    			row += `<tr>
+    				<td>${film.querySelector("id").innerHTML}</td>
+                    <td>${film.querySelector("title").innerHTML}</td>
+                    <td>${film.querySelector("year").innerHTML}</td>
+                    <td>${film.querySelector("director").innerHTML}</td>
+                    <td>${film.querySelector("stars").innerHTML}</td>
+                    <td>${film.querySelector("review").innerHTML}</td>
+                    <td>
+                    	<div class="film_actions">
+                    		<a href="UpdateFilm?id=${film.querySelector("id").innerHTML}"><i class="fa-regular fa-pen-to-square"></i></a>
+                    		<a href="DeleteFilm?filmIdToDelete=${film.querySelector("id").innerHTML}"><i class="fa-solid fa-trash-can"></i></a>
+                    	</div> 
+                    </td>
+    			</tr>`;
+    		}
+    		tableBody.innerHTML = row;
+    	})
+    	.catch(error => console.error("ERROR: ", error));  // Handle any errors in the fetch chain
+    }
+    
+    function textFetch(){
+    	const url = 'api';
+    	fetch(url,{
+    		headers: {
+    			"Accept": document.querySelector(".format_select").value
+    		}
+    	})
+    	.then(response => response.text())
+    	.then(text => {
+    		let films = []
+    		text.split("\n").forEach(f=>{
+    			let arr = f.split("\t")
+    			films.push({
+    				id: parseInt(arr[0]),
+    				title: arr[1],
+    				year: parseInt(arr[2]),
+    				director: arr[3],
+    				stars: arr[4],
+    				review: arr[5]
+    			})
+    		})
+    		const tableBody = document.querySelector('#filmsTable tbody');
+    		// Clear existing entries if any
+    		tableBody.innerHTML = '';
+    		let row = "";
+    		films.forEach(film => {
+    			row += `<tr>
+    				<td>${film.id}</td>
+                    <td>${film.title}</td>
+                    <td>${film.year}</td>
+                    <td>${film.director}</td>
+                    <td>${film.stars}</td>
+                    <td>${film.review}</td>
+                    <td>
+                    	<div  class="film_actions">
+                    		<a href="UpdateFilm?id=${film.id}"><i class="fa-regular fa-pen-to-square"></i></a>
+                    		<a href="DeleteFilm?filmIdToDelete=${film.id}"><i class="fa-solid fa-trash-can"></i></a>
+                    	</div> 
+                    </td>
+    			</tr>`
+    		})
+    		tableBody.innerHTML = row;
+    	})
+    }
+
+    document.querySelector(".format_select").addEventListener('change', function (e){
+    	if(e.target.value == "application/json"){
+    		jsonFetch();
+    	}else if(e.target.value == "application/xml"){
+    		xmlFetch();
+    	}else if(e.target.value == "text/html"){
+    		textFetch();
+    	}
+    } )
+    jsonFetch();
+    </script>
+</body>
+</html> 
+
